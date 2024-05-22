@@ -73,7 +73,7 @@ namespace StudentRegisterFormAPI.Controllers
         public async Task<ActionResult<Student>> UpdateStudent(Student updateStudentRequest)
         {
             var student = await _studentDbContext.Students.FindAsync(updateStudentRequest.id);
-            if(student == null)
+            if (student == null)
             {
                 return NotFound();
             }
@@ -84,7 +84,7 @@ namespace StudentRegisterFormAPI.Controllers
 
             student.dob = updateStudentRequest.dob;
 
-            student.gender = updateStudentRequest.gender;   
+            student.gender = updateStudentRequest.gender;
             student.profileimage = updateStudentRequest.profileimage;
 
             await _studentDbContext.SaveChangesAsync();
@@ -98,24 +98,24 @@ namespace StudentRegisterFormAPI.Controllers
             throw new NotImplementedException();
         }
 
-               //[HttpDelete]
-               // [Route("DeleteStudent/{id}")]
-               // public bool DeleteStudent(int id)
-               // {
-               //     bool a = false;
-               //     var student = _studentDbContext.Students.Find(id);
-               //    if (student != null)
-               //     {
-               //         a = true;
-               //        _studentDbContext.Entry(student).State = EntityState.Deleted;
-               //        _studentDbContext.SaveChanges();
-               //     }
-               //     else
-               //     {
-               //        a = false;
-               //     }
-               //     return a;
-               // }
+        //[HttpDelete]
+        // [Route("DeleteStudent/{id}")]
+        // public bool DeleteStudent(int id)
+        // {
+        //     bool a = false;
+        //     var student = _studentDbContext.Students.Find(id);
+        //    if (student != null)
+        //     {
+        //         a = true;
+        //        _studentDbContext.Entry(student).State = EntityState.Deleted;
+        //        _studentDbContext.SaveChanges();
+        //     }
+        //     else
+        //     {
+        //        a = false;
+        //     }
+        //     return a;
+        // }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
@@ -132,20 +132,33 @@ namespace StudentRegisterFormAPI.Controllers
             return Ok(student);
         }
 
-        //[HttpDelete]
-        //[Route("{id:any")]
-        //public async Task<ActionResult<Student>> DeleteStudent(int id)
-        //{
-        //    var student = await _studentDbContext.Students.FindAsync(id);
-        //    if (student == null)
+        //    [HttpPost]
+        //    [Route("savefile")]
+        //    public async Task<IActionResult> SaveFile([FromForm] IFormFile profileimage)
         //    {
-        //        return NotFound();
+        //        if (profileimage == null || profileimage.Length == 0)
+        //        {
+        //            return BadRequest("No file uploaded");
+        //        }
+
+        //        string base64Image;
+        //        using (var ms = new MemoryStream())
+        //        {
+        //            await profileimage.CopyToAsync(ms);
+        //            var fileBytes = ms.ToArray();
+        //            base64Image = Convert.ToBase64String(fileBytes);
+        //        }
+
+        //        // Here, save the base64Image string to your database as needed
+
+        //        return Ok(new { ImageData = base64Image });
         //    }
-        //    _studentDbContext.Students.Remove(student);
-        //    await _studentDbContext.SaveChangesAsync();
-        //    return Ok(student);
         //}
+
+
+
     }
-
-
 }
+
+
+
